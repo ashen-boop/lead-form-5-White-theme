@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Your Free Proposal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #faf8f5;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .lead-form-container { width: 100%; max-width: 780px; position: relative; }
+    .lead-form-wrapper {
+      width: 100%;
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 50px 50px 45px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04);
+      position: relative;
+    }
+    /* BACK BUTTON - top left, red bg, white text, +5px bigger */
+    .back-button-wrapper {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      z-index: 10;
+    }
+    .btn-back-custom {
+      background: #d32f2f;          /* solid red */
+      border: 1px solid #b71c1c;
+      border-radius: 40px;
+      padding: 10px 22px 10px 18px;  /* increased by ~5px from previous */
+      font-size: 0.95rem;            /* slightly bigger */
+      font-weight: 600;
+      color: #ffffff;               /* white text */
+      cursor: pointer;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Inter', system-ui, sans-serif;
+      box-shadow: 0 2px 8px rgba(180, 20, 20, 0.25);
+      text-decoration: none;
+    }
+    .btn-back-custom i { font-size: 0.9rem; color: #ffffff; }
+    .btn-back-custom:hover {
+      background: #b71c1c;
+      border-color: #9a1515;
+      box-shadow: 0 4px 14px rgba(180, 20, 20, 0.35);
+      transform: scale(1.02);
+    }
+    .btn-back-custom a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lead-form-header { text-align: center; margin-bottom: 40px; margin-top: 10px; }
+    .lead-form-badge {
+      display: inline-block;
+      background: rgba(255,107,0,0.08);
+      border: 1px solid rgba(255,107,0,0.15);
+      padding: 6px 20px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ff6b00;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+    }
+    .lead-form-header h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #0a0a0a;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ff6b00, #ff1493, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .lead-form-subtitle {
+      color: #4a4a4a;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .form-section { margin-bottom: 32px; padding-bottom: 32px; border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .form-section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff6b00, #ff1493, #2563eb);
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    .section-label h3 { font-size: 1.15rem; font-weight: 700; color: #0a0a0a; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 0.9rem; font-weight: 600; color: #1e293b; margin-bottom: 6px; }
+    .required { color: #ff6b00; font-weight: 700; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #e8e0d8;
+      border-radius: 12px;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.95rem;
+      background: #faf8f5;
+      transition: all 0.3s ease;
+      color: #0a0a0a;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: #ff6b00;
+      box-shadow: 0 0 0 4px rgba(255,107,0,0.06);
+      background: #ffffff;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: #94a3b8; }
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a4a4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .form-group select option:disabled { color: #b0b0b0; background-color: #f0ece8; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .social-hint {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(255,107,0,0.04);
+      border-radius: 10px;
+      margin-top: 6px;
+      border: 1px solid rgba(255,107,0,0.06);
+    }
+    .social-hint i { color: #ff6b00; font-size: 0.9rem; }
+    .social-hint span { font-size: 0.8rem; color: #4a4a4a; font-style: italic; line-height: 1.5; }
+    .privacy-notice {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: rgba(46,125,50,0.04);
+      border-radius: 12px;
+      margin: 24px 0 20px;
+      border: 1px solid rgba(46,125,50,0.08);
+    }
+    .privacy-notice i { color: #2e7d32; font-size: 1.1rem; }
+    .privacy-notice span { font-size: 0.85rem; color: #4a4a4a; line-height: 1.5; }
+    .btn-submit-lead {
+      width: 100%;
+      padding: 18px 32px;
+      border: none;
+      border-radius: 60px;
+      background: linear-gradient(135deg, #ff6b00, #ff1493, #2563eb);
+      background-size: 300% 300%;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: 'Inter', system-ui, sans-serif;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(255,107,0,0.25);
+    }
+    .btn-submit-lead:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(255,107,0,0.35);
+      background-position: 100% 50%;
+    }
+    .btn-submit-lead:active { transform: scale(0.97); }
+    .btn-submit-lead i { font-size: 1.1rem; }
+    .form-footer-spacer { height: 20px; }
+    .loading-spinner { display: none; text-align: center; padding: 20px; }
+    .loading-spinner.show { display: block; }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #ff6b00;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    #thankYouPage {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    #thankYouPage.active { display: flex; }
+    .thank-you-wrapper {
+      background: #ffffff;
+      border-radius: 32px;
+      padding: 50px 50px 45px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      animation: slideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.2);
+    }
+    .thank-you-icon {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2e7d32, #43a047);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 2.5rem;
+      color: #fff;
+      box-shadow: 0 12px 40px rgba(46,125,50,0.3);
+    }
+    .thank-you-wrapper h2 { font-size: 1.8rem; font-weight: 800; color: #0a0a0a; margin-bottom: 8px; }
+    .thank-you-wrapper p { color: #4a4a4a; font-size: 1rem; line-height: 1.7; }
+    .thank-you-wrapper strong { color: #ff6b00; }
+    .btn-back-home {
+      margin-top: 24px;
+      padding: 14px 40px;
+      border-radius: 60px;
+      border: none;
+      background: #0a0a0a;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Inter', system-ui, sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-back-home:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+    .hub-package-container { display: none; margin-top: 10px; padding: 16px 20px; background: #f8f6f3; border-radius: 12px; border-left: 4px solid #ff6b00; }
+    .hub-package-container.show { display: block; }
+    .hub-package-container .hub-label { font-size: 0.85rem; font-weight: 600; color: #0a0a0a; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .hub-package-container .hub-label i { color: #ff6b00; }
+    .budget-hint { font-size: 0.8rem; color: #4a4a4a; margin-top: 4px; }
+    .budget-hint i { color: #ff6b00; }
+    .project-description-wrapper { margin-top: 10px; }
+
+    @media (max-width: 768px) {
+      .lead-form-wrapper { padding: 30px 20px 25px; }
+      .lead-form-header h2 { font-size: 1.6rem; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .thank-you-wrapper { padding: 30px 20px 25px; }
+      .thank-you-wrapper h2 { font-size: 1.4rem; }
+      .back-button-wrapper { top: 14px; left: 16px; }
+      .btn-back-custom { font-size: 0.8rem; padding: 8px 16px 8px 14px; }
+    }
+    @media (max-width: 480px) {
+      .lead-form-header h2 { font-size: 1.3rem; }
+      .lead-form-badge { font-size: 0.65rem; padding: 4px 14px; }
+      .btn-submit-lead { font-size: 0.95rem; padding: 16px 24px; }
+      .privacy-notice { flex-direction: column; text-align: center; padding: 12px 16px; }
+      .social-hint { flex-direction: column; text-align: center; padding: 12px 16px; }
+      .back-button-wrapper { top: 12px; left: 12px; }
+      .btn-back-custom { font-size: 0.7rem; padding: 6px 12px 6px 10px; }
+      .btn-back-custom i { font-size: 0.7rem; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="lead-form-container" id="leadFormContainer">
+  <div class="lead-form-wrapper">
+    <!-- BACK BUTTON - top left, red bg, white text, +5px bigger -->
+    <div class="back-button-wrapper">
+      <button class="btn-back-custom" id="backButton">
+        <a href="#" id="backLink" target="_self">
+          <i class="fas fa-arrow-left"></i> Home
+        </a>
+      </button>
+    </div>
+
+    <div class="lead-form-header">
+      <span class="lead-form-badge"><i class="fas fa-rocket"></i> Free Consultation</span>
+      <h2>Get Your Free Proposal in <span class="gradient-text">24 Hours</span></h2>
+      <p class="lead-form-subtitle">Tell us about your project and we'll send you a custom plan + pricing for the right Hub.</p>
+    </div>
+
+    <form id="leadForm" action="https://formspree.io/f/meajkeve" method="POST" onsubmit="submitLeadForm(event)">
+      <input type="hidden" name="_subject" value="New Proposal Request from Website" />
+      <input type="hidden" name="_captcha" value="false" />
+
+      <div class="form-section">
+        <div class="section-label">
+          <span class="section-number">01</span>
+          <h3>Personal Details</h3>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fullName">Full Name <span class="required">*</span></label>
+            <input type="text" id="fullName" name="Full Name" placeholder="John Fernando" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">WhatsApp / Phone Number <span class="required">*</span></label>
+            <input type="tel" id="phone" name="Phone Number" placeholder="+94 77 123 4567" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address <span class="required">*</span></label>
+          <input type="email" id="email" name="Email Address" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="timelineSelect">How soon are you looking to start? <span class="required">*</span></label>
+          <select id="timelineSelect" name="Timeline" required>
+            <option value="">Select timeline</option>
+            <option value="ASAP - I urgently need this">ASAP - I urgently need this</option>
+            <option value="1-3 Months">1-3 Months</option>
+            <option value="Just getting prices to plan">Just getting prices to plan</option>
+            <option value="Exploring ideas - If prices are affordable I'll start">Exploring ideas - If prices are affordable I'll start</option>
+            <option value="Just researching">Just researching</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-label">
+          <span class="section-number">02</span>
+          <h3>Business Details</h3>
+        </div>
+        <div class="form-group">
+          <label for="companyName">Company / Business Name</label>
+          <input type="text" id="companyName" name="Company Name" placeholder="Your Brand Name" />
+        </div>
+        <div class="form-group">
+          <label for="hubSelect">Which Hub do you need? <span class="required">*</span></label>
+          <select id="hubSelect" name="Hub Selected" required onchange="updateHubFields()">
+            <option value="">Select a Hub</option>
+            <option value="Revenue Hub">Revenue Hub</option>
+            <option value="Backend Hub">Backend Hub</option>
+            <option value="Booking Hub">Booking Hub</option>
+            <option value="Independent Services">Independent Services</option>
+          </select>
+        </div>
+
+        <!-- REVENUE HUB -->
+        <div id="revenuePackages" class="hub-package-container">
+          <div class="hub-label"><i class="fas fa-chart-line"></i> Revenue Hub - Budget Range</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="revenueMin">Minimum Budget <span class="required">*</span></label>
+              <select id="revenueMin" name="Revenue Min Budget" class="budget-min" data-hub="revenue" onchange="filterMaxOptions('revenue')">
+                <option value="">Select min</option>
+                <option value="3500">$3,500</option><option value="4000">$4,000</option><option value="5000">$5,000</option>
+                <option value="6000">$6,000</option><option value="7000">$7,000</option><option value="8000">$8,000</option>
+                <option value="9000">$9,000+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="revenueMax">Maximum Budget <span class="required">*</span></label>
+              <select id="revenueMax" name="Revenue Max Budget" class="budget-max" data-hub="revenue" onchange="filterMinOptions('revenue')">
+                <option value="">Select max</option>
+                <option value="3500">$3,500</option><option value="4000">$4,000</option><option value="5000">$5,000</option>
+                <option value="6000">$6,000</option><option value="7000">$7,000</option><option value="8000">$8,000</option>
+                <option value="9000">$9,000+</option>
+              </select>
+            </div>
+          </div>
+          <div class="budget-hint"><i class="fas fa-info-circle"></i> Select your minimum and maximum budget range</div>
+        </div>
+
+        <!-- BACKEND HUB -->
+        <div id="backendPackages" class="hub-package-container">
+          <div class="hub-label"><i class="fas fa-server"></i> Backend Hub - Budget Range</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="backendMin">Minimum Budget <span class="required">*</span></label>
+              <select id="backendMin" name="Backend Min Budget" class="budget-min" data-hub="backend" onchange="filterMaxOptions('backend')">
+                <option value="">Select min</option>
+                <option value="2000">$2,000</option><option value="3000">$3,000</option><option value="4000">$4,000</option>
+                <option value="5000">$5,000</option><option value="6000">$6,000</option><option value="7000">$7,000</option>
+                <option value="8000">$8,000+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="backendMax">Maximum Budget <span class="required">*</span></label>
+              <select id="backendMax" name="Backend Max Budget" class="budget-max" data-hub="backend" onchange="filterMinOptions('backend')">
+                <option value="">Select max</option>
+                <option value="2000">$2,000</option><option value="3000">$3,000</option><option value="4000">$4,000</option>
+                <option value="5000">$5,000</option><option value="6000">$6,000</option><option value="7000">$7,000</option>
+                <option value="8000">$8,000+</option>
+              </select>
+            </div>
+          </div>
+          <div class="budget-hint"><i class="fas fa-info-circle"></i> Select your minimum and maximum budget range</div>
+        </div>
+
+        <!-- BOOKING HUB -->
+        <div id="bookingPackages" class="hub-package-container">
+          <div class="hub-label"><i class="fas fa-calendar-check"></i> Booking Hub - Budget Range</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bookingMin">Minimum Budget <span class="required">*</span></label>
+              <select id="bookingMin" name="Booking Min Budget" class="budget-min" data-hub="booking" onchange="filterMaxOptions('booking')">
+                <option value="">Select min</option>
+                <option value="3500">$3,500</option><option value="4000">$4,000</option><option value="5000">$5,000</option>
+                <option value="6000">$6,000</option><option value="7000">$7,000</option><option value="8000">$8,000</option>
+                <option value="9000">$9,000+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="bookingMax">Maximum Budget <span class="required">*</span></label>
+              <select id="bookingMax" name="Booking Max Budget" class="budget-max" data-hub="booking" onchange="filterMinOptions('booking')">
+                <option value="">Select max</option>
+                <option value="3500">$3,500</option><option value="4000">$4,000</option><option value="5000">$5,000</option>
+                <option value="6000">$6,000</option><option value="7000">$7,000</option><option value="8000">$8,000</option>
+                <option value="9000">$9,000+</option>
+              </select>
+            </div>
+          </div>
+          <div class="budget-hint"><i class="fas fa-info-circle"></i> Select your minimum and maximum budget range</div>
+        </div>
+
+        <!-- INDEPENDENT SERVICES -->
+        <div id="independentPackages" class="hub-package-container">
+          <div class="hub-label"><i class="fas fa-tools"></i> Independent Services - Budget Range</div>
+          <div class="form-group">
+            <label for="serviceSelect">Select a Service <span class="required">*</span></label>
+            <select id="serviceSelect" name="Independent Service" onchange="updateServicePackage()">
+              <option value="">Choose a service</option>
+              <option value="Graphic Design">🎨 Graphic Design</option>
+              <option value="Web Development">💻 Web Development</option>
+              <option value="Digital Marketing">📈 Digital Marketing</option>
+            </select>
+          </div>
+          <div id="graphicDesignContainer" style="display:none;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="graphicMin">Minimum Budget <span class="required">*</span></label>
+                <select id="graphicMin" name="Graphic Design Min Budget" class="budget-min" data-hub="graphic" onchange="filterMaxOptions('graphic')">
+                  <option value="">Select min</option>
+                  <option value="1500">$1,500</option><option value="2000">$2,000</option><option value="3000">$3,000</option>
+                  <option value="4000">$4,000</option><option value="5000">$5,000</option><option value="6000">$6,000+</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="graphicMax">Maximum Budget <span class="required">*</span></label>
+                <select id="graphicMax" name="Graphic Design Max Budget" class="budget-max" data-hub="graphic" onchange="filterMinOptions('graphic')">
+                  <option value="">Select max</option>
+                  <option value="1500">$1,500</option><option value="2000">$2,000</option><option value="3000">$3,000</option>
+                  <option value="4000">$4,000</option><option value="5000">$5,000</option><option value="6000">$6,000+</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="webDevelopmentContainer" style="display:none;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="webMin">Minimum Budget <span class="required">*</span></label>
+                <select id="webMin" name="Web Development Min Budget" class="budget-min" data-hub="web" onchange="filterMaxOptions('web')">
+                  <option value="">Select min</option>
+                  <option value="500">$500</option><option value="1000">$1,000</option><option value="2500">$2,500</option>
+                  <option value="5000">$5,000</option><option value="7500">$7,500</option><option value="10000">$10,000+</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="webMax">Maximum Budget <span class="required">*</span></label>
+                <select id="webMax" name="Web Development Max Budget" class="budget-max" data-hub="web" onchange="filterMinOptions('web')">
+                  <option value="">Select max</option>
+                  <option value="500">$500</option><option value="1000">$1,000</option><option value="2500">$2,500</option>
+                  <option value="5000">$5,000</option><option value="7500">$7,500</option><option value="10000">$10,000+</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div id="digitalMarketingContainer" style="display:none;">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="marketingMin">Minimum Budget (monthly) <span class="required">*</span></label>
+                <select id="marketingMin" name="Digital Marketing Min Budget" class="budget-min" data-hub="marketing" onchange="filterMaxOptions('marketing')">
+                  <option value="">Select min</option>
+                  <option value="500">$500/mo</option><option value="1000">$1,000/mo</option><option value="2500">$2,500/mo</option>
+                  <option value="5000">$5,000/mo</option><option value="7500">$7,500/mo</option><option value="10000">$10,000+/mo</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="marketingMax">Maximum Budget (monthly) <span class="required">*</span></label>
+                <select id="marketingMax" name="Digital Marketing Max Budget" class="budget-max" data-hub="marketing" onchange="filterMinOptions('marketing')">
+                  <option value="">Select max</option>
+                  <option value="500">$500/mo</option><option value="1000">$1,000/mo</option><option value="2500">$2,500/mo</option>
+                  <option value="5000">$5,000/mo</option><option value="7500">$7,500/mo</option><option value="10000">$10,000+/mo</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="budget-hint" style="margin-top:8px;"><i class="fas fa-info-circle"></i> Select your minimum and maximum budget range</div>
+        </div>
+
+        <div class="project-description-wrapper">
+          <div class="form-group">
+            <label for="projectDescription">Tell us about your project <span class="required">*</span></label>
+            <textarea id="projectDescription" name="Project Description" rows="4" placeholder="Briefly describe what you need. Ex: 'I need an e-commerce site to sell clothes online'" required></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section" style="border-bottom: none;">
+        <div class="section-label">
+          <span class="section-number">03</span>
+          <h3>Social Media</h3>
+        </div>
+        <div class="form-group">
+          <label for="hasSocialMedia">Does your business have a social media page? <span class="required">*</span></label>
+          <select id="hasSocialMedia" name="Has Social Media" required onchange="toggleSocialMediaField()">
+            <option value="">Select an option</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div id="socialMediaContainer" style="display:none;">
+          <div class="form-group">
+            <label for="socialMediaName">What is your social media page name / handle? <span class="required">*</span></label>
+            <input type="text" id="socialMediaName" name="Social Media Handle" placeholder="Ex: @yourbrand or facebook.com/yourbrand" />
+          </div>
+        </div>
+        <div class="social-hint">
+          <i class="fas fa-info-circle"></i>
+          <span>We use this to have more understanding about your brand</span>
+        </div>
+      </div>
+
+      <div class="privacy-notice">
+        <i class="fas fa-shield-alt"></i>
+        <span>We respect your privacy. We'll WhatsApp or email you within 24 hours with next steps.</span>
+      </div>
+
+      <button type="submit" class="btn-submit-lead" id="submitBtn">
+        <i class="fas fa-paper-plane"></i> Send My Proposal Request
+      </button>
+
+      <div class="form-footer-spacer"></div>
+
+      <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <p style="margin-top:10px; color:#4a4a4a;">Sending your request...</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="thankYouPage">
+  <div class="thank-you-wrapper">
+    <div class="thank-you-icon"><i class="fas fa-check-circle"></i></div>
+    <h2>Thanks! We got your details.</h2>
+    <p>Our team is reviewing your request for the <strong id="thankYouHub">Revenue Hub</strong>.</p>
+    <p style="margin-top:10px; color:#4a4a4a;">We'll email you within <strong style="color:#2e7d32;">24 hours</strong> with 2 package options.</p>
+    <button class="btn-back-home" onclick="resetForm()"><i class="fas fa-arrow-left"></i> Start Over</button>
+  </div>
+</div>
+
+<script>
+  // ----- BACK BUTTON: paste your URL here -----
+  (function() {
+    // CHANGE THIS URL to whatever you need
+    const CUSTOM_BACK_URL = "https://theartisticunity.art";  // <-- paste your URL here
+    const backLink = document.getElementById('backLink');
+    if (backLink) {
+      backLink.href = CUSTOM_BACK_URL;
+    }
+  })();
+
+  // Store original options for each hub
+  const hubOptions = {};
+
+  function storeOriginalOptions(hub) {
+    if (!hubOptions[hub]) {
+      hubOptions[hub] = { min: [], max: [] };
+      const minSelect = document.querySelector(`.budget-min[data-hub="${hub}"]`);
+      const maxSelect = document.querySelector(`.budget-max[data-hub="${hub}"]`);
+      if (minSelect) {
+        for (let option of minSelect.options) {
+          hubOptions[hub].min.push({ value: option.value, text: option.text });
+        }
+      }
+      if (maxSelect) {
+        for (let option of maxSelect.options) {
+          hubOptions[hub].max.push({ value: option.value, text: option.text });
+        }
+      }
+    }
+  }
+
+  function filterMaxOptions(hub) {
+    storeOriginalOptions(hub);
+    const minSelect = document.querySelector(`.budget-min[data-hub="${hub}"]`);
+    const maxSelect = document.querySelector(`.budget-max[data-hub="${hub}"]`);
+    if (!minSelect || !maxSelect) return;
+    const minValue = parseInt(minSelect.value);
+    const currentMaxValue = maxSelect.value;
+    maxSelect.disabled = false;
+    maxSelect.innerHTML = '';
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Select max';
+    maxSelect.appendChild(defaultOption);
+    for (let opt of hubOptions[hub].max) {
+      if (opt.value === '') continue;
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.text;
+      const optValue = parseInt(opt.value);
+      if (minValue && optValue < minValue) {
+        option.disabled = true;
+        option.style.color = '#b0b0b0';
+      }
+      if (opt.value === currentMaxValue && optValue >= minValue) {
+        option.selected = true;
+      }
+      maxSelect.appendChild(option);
+    }
+    if (currentMaxValue) {
+      const currentMaxNum = parseInt(currentMaxValue);
+      if (minValue && currentMaxNum < minValue) {
+        maxSelect.value = '';
+      }
+    }
+  }
+
+  function filterMinOptions(hub) {
+    storeOriginalOptions(hub);
+    const minSelect = document.querySelector(`.budget-min[data-hub="${hub}"]`);
+    const maxSelect = document.querySelector(`.budget-max[data-hub="${hub}"]`);
+    if (!minSelect || !maxSelect) return;
+    const maxValue = parseInt(maxSelect.value);
+    const currentMinValue = minSelect.value;
+    minSelect.disabled = false;
+    minSelect.innerHTML = '';
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Select min';
+    minSelect.appendChild(defaultOption);
+    for (let opt of hubOptions[hub].min) {
+      if (opt.value === '') continue;
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.text;
+      const optValue = parseInt(opt.value);
+      if (maxValue && optValue > maxValue) {
+        option.disabled = true;
+        option.style.color = '#b0b0b0';
+      }
+      if (opt.value === currentMinValue && optValue <= maxValue) {
+        option.selected = true;
+      }
+      minSelect.appendChild(option);
+    }
+    if (currentMinValue) {
+      const currentMinNum = parseInt(currentMinValue);
+      if (maxValue && currentMinNum > maxValue) {
+        minSelect.value = '';
+      }
+    }
+  }
+
+  function updateHubFields() {
+    const hub = document.getElementById('hubSelect').value;
+    document.getElementById('revenuePackages').classList.remove('show');
+    document.getElementById('backendPackages').classList.remove('show');
+    document.getElementById('bookingPackages').classList.remove('show');
+    document.getElementById('independentPackages').classList.remove('show');
+    resetBudgetSelects();
+    if (hub === 'Revenue Hub') document.getElementById('revenuePackages').classList.add('show');
+    else if (hub === 'Backend Hub') document.getElementById('backendPackages').classList.add('show');
+    else if (hub === 'Booking Hub') document.getElementById('bookingPackages').classList.add('show');
+    else if (hub === 'Independent Services') document.getElementById('independentPackages').classList.add('show');
+  }
+
+  function resetBudgetSelects() {
+    document.querySelectorAll('.budget-min, .budget-max').forEach(select => {
+      select.selectedIndex = 0;
+      select.disabled = false;
+    });
+  }
+
+  function updateServicePackage() {
+    const service = document.getElementById('serviceSelect').value;
+    document.getElementById('graphicDesignContainer').style.display = 'none';
+    document.getElementById('webDevelopmentContainer').style.display = 'none';
+    document.getElementById('digitalMarketingContainer').style.display = 'none';
+    document.querySelectorAll('#graphicDesignContainer select, #webDevelopmentContainer select, #digitalMarketingContainer select')
+      .forEach(select => { select.selectedIndex = 0; select.disabled = false; });
+    if (service === 'Graphic Design') document.getElementById('graphicDesignContainer').style.display = 'block';
+    else if (service === 'Web Development') document.getElementById('webDevelopmentContainer').style.display = 'block';
+    else if (service === 'Digital Marketing') document.getElementById('digitalMarketingContainer').style.display = 'block';
+  }
+
+  function toggleSocialMediaField() {
+    const hasSocialMedia = document.getElementById('hasSocialMedia').value;
+    const container = document.getElementById('socialMediaContainer');
+    const input = document.getElementById('socialMediaName');
+    if (hasSocialMedia === 'Yes') {
+      container.style.display = 'block';
+      input.required = true;
+    } else {
+      container.style.display = 'none';
+      input.required = false;
+      input.value = '';
+    }
+  }
+
+  function submitLeadForm(e) {
+    e.preventDefault();
+    const fullName = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const hub = document.getElementById('hubSelect');
+    const projectDescription = document.getElementById('projectDescription').value.trim();
+    const timeline = document.getElementById('timelineSelect');
+    const hasSocialMedia = document.getElementById('hasSocialMedia').value;
+    if (!fullName || !phone || !email || !hub.value || !projectDescription || !timeline.value || !hasSocialMedia) {
+      alert('Please fill in all required fields marked with *');
+      return;
+    }
+    if (hasSocialMedia === 'Yes') {
+      const socialMediaName = document.getElementById('socialMediaName').value.trim();
+      if (!socialMediaName) { alert('Please enter your social media page name/handle'); return; }
+    }
+    let budgetValid = false;
+    let minVal = 0, maxVal = 0;
+    if (hub.value === 'Revenue Hub') {
+      const min = document.getElementById('revenueMin'), max = document.getElementById('revenueMax');
+      if (min.value && max.value) { minVal = parseInt(min.value); maxVal = parseInt(max.value); if (minVal <= maxVal) budgetValid = true; }
+    } else if (hub.value === 'Backend Hub') {
+      const min = document.getElementById('backendMin'), max = document.getElementById('backendMax');
+      if (min.value && max.value) { minVal = parseInt(min.value); maxVal = parseInt(max.value); if (minVal <= maxVal) budgetValid = true; }
+    } else if (hub.value === 'Booking Hub') {
+      const min = document.getElementById('bookingMin'), max = document.getElementById('bookingMax');
+      if (min.value && max.value) { minVal = parseInt(min.value); maxVal = parseInt(max.value); if (minVal <= maxVal) budgetValid = true; }
+    } else if (hub.value === 'Independent Services') {
+      const service = document.getElementById('serviceSelect').value;
+      if (!service) { alert('Please select a service'); return; }
+      let min, max;
+      if (service === 'Graphic Design') { min = document.getElementById('graphicMin'); max = document.getElementById('graphicMax'); }
+      else if (service === 'Web Development') { min = document.getElementById('webMin'); max = document.getElementById('webMax'); }
+      else if (service === 'Digital Marketing') { min = document.getElementById('marketingMin'); max = document.getElementById('marketingMax'); }
+      if (min && max && min.value && max.value) { minVal = parseInt(min.value); maxVal = parseInt(max.value); if (minVal <= maxVal) budgetValid = true; }
+    }
+    if (!budgetValid) {
+      alert('Please select both minimum and maximum budget, and ensure minimum is not greater than maximum.');
+      return;
+    }
+    document.getElementById('submitBtn').style.display = 'none';
+    document.getElementById('loadingSpinner').classList.add('show');
+    let hubName = hub.value;
+    const form = document.getElementById('leadForm');
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(response => {
+      if (response.ok) {
+        document.getElementById('thankYouHub').textContent = hubName;
+        document.getElementById('leadFormContainer').style.display = 'none';
+        document.getElementById('thankYouPage').classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        alert('Something went wrong. Please try again or email us directly.');
+      }
+    })
+    .catch(error => {
+      alert('Something went wrong. Please try again or email us directly.');
+    })
+    .finally(() => {
+      document.getElementById('submitBtn').style.display = 'flex';
+      document.getElementById('loadingSpinner').classList.remove('show');
+    });
+  }
+
+  function resetForm() {
+    document.getElementById('thankYouPage').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('leadForm').reset();
+    document.getElementById('leadFormContainer').style.display = 'block';
+    document.getElementById('revenuePackages').classList.remove('show');
+    document.getElementById('backendPackages').classList.remove('show');
+    document.getElementById('bookingPackages').classList.remove('show');
+    document.getElementById('independentPackages').classList.remove('show');
+    document.getElementById('graphicDesignContainer').style.display = 'none';
+    document.getElementById('webDevelopmentContainer').style.display = 'none';
+    document.getElementById('digitalMarketingContainer').style.display = 'none';
+    document.getElementById('socialMediaContainer').style.display = 'none';
+    document.querySelectorAll('.budget-min, .budget-max').forEach(select => { select.disabled = false; });
+    document.getElementById('submitBtn').style.display = 'flex';
+    document.getElementById('loadingSpinner').classList.remove('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
